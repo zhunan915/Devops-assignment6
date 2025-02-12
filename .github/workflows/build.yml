@@ -53,7 +53,7 @@ jobs:
           # "build" typically runs tests & creates the .jar in build/libs
 
       - name: Upload .jar artifact (Optional)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: micronaut-application-jar
           path: build/libs/*.jar
