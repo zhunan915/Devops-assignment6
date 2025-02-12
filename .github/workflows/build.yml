@@ -36,16 +36,16 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      # Wait for MySQL to fully start (increased retries)
+      # Wait for MySQL to fully start
       - name: Wait for MySQL
         run: |
-          for i in {1..30}; do  # Increased retries to 30
+          for i in {1..10}; do 
             if mysqladmin ping --host 10.11.12.28 --user root --password password --silent; then
               echo "MySQL is ready!"
               break
             fi
             echo "Waiting for MySQL..."
-            sleep 5
+            sleep 2
           done
 
       - name: Build & Test
