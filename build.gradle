@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.slf4j:logback-classic:1.2.11'
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
 
     // jackson serialization - deserialization
     implementation("io.micronaut.serde:micronaut-serde-jackson")
@@ -41,8 +41,8 @@ application {
     mainClass = "com.piyal.Application"
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("21")
-    targetCompatibility = JavaVersion.toVersion("21")
+    sourceCompatibility = JavaVersion.toVersion("18")
+    targetCompatibility = JavaVersion.toVersion("18")
 }
 
 
@@ -71,5 +71,5 @@ micronaut {
 
 
 tasks.named("dockerfileNative") {
-    jdkVersion = "21"
+    jdkVersion = "18"
 }
