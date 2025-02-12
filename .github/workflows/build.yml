@@ -9,10 +9,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    # Start MySQL service:
     services:
       mysql:
-        image: mysql:8
+        image: mysql:8.0.32
+        platform: linux/amd64
         ports:
           - 3306:3306
         env:
@@ -33,11 +33,15 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      # Optional wait for MySQL to fully start
+      # Make gradlew executable
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # Wait for MySQL to fully start (increased retries)
       - name: Wait for MySQL
         run: |
-          for i in {1..10}; do
-            if mysqladmin ping --host 127.0.0.1 --user root --password root --silent; then
+          for i in {1..30}; do  # Increased retries to 30
+            if mysqladmin ping --host 10.11.12.28 --user root --password password --silent; then
               echo "MySQL is ready!"
               break
             fi
@@ -48,7 +52,6 @@ jobs:
       - name: Build & Test
         run: |
           ./gradlew clean build
-          # "build" typically runs tests & creates the .jar in build/libs
 
       - name: Upload .jar artifact (Optional)
         uses: actions/upload-artifact@v4
