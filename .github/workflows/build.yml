@@ -18,8 +18,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: testdb
-          MYSQL_USER: root
-          MYSQL_PASSWORD: password
         options: --health-cmd="mysqladmin ping -h localhost"
           --health-interval=10s
           --health-timeout=5s
